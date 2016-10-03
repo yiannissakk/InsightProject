@@ -10,3 +10,5 @@ do
     tmux send-keys -t $SESSION:$ID 'python kafka_producer.py '"$IP_ADDR"' '"$ID"'' C-m
 done
 
+#run bash spawn_kafka_streams.sh <your elastic IP> <number of desired partitions> <custom name of your session>
+#to create a kafka stream
