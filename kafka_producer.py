@@ -1,5 +1,4 @@
 import random
-from django.utils.encoding import smart_str, smart_unicode
 import sys
 import six
 from datetime import datetime
