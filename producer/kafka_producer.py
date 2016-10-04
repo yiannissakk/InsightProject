@@ -41,9 +41,7 @@ class Producer(object):
                                                   createdat_field,
                                                   tweetid_field,
                                                   username_field)
-                    if k%10 == 0:
-                        time.sleep(2)
-                        
+                     
                     #the producers queue messages in the form (topic, producer#, message)   
                     self.producer.send_messages('tweets1', source_symbol, message_info)
                     k=k+1
