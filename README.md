@@ -13,7 +13,9 @@ TweetSearch is powered by:
 
 All of the technologies listed above are connected as follows
 
-![saxsa](https://github.com/yiannissakk/InsightProject/frontEnd/static/pipeline.png)
+
+![My image](yiannissakk.github.com/InsightProject/frontEnd/static/image.jpg)
+
 
 # Data Ingestion
 
