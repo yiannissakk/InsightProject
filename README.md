@@ -4,10 +4,10 @@ TweetSearch is an app that lets users search for tweets given a specific keyword
 
 TweetSearch is powered by:
 
--Kafka
--Spark Streaming
--Elasticsearch
--Flask
+- Kafka
+- Spark Streaming
+- Elasticsearch
+- Flask
 
 # Pipeline
 
