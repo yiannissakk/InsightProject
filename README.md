@@ -25,4 +25,6 @@ Real-time processing is handled by Spark Streaming. Spark consumes the incoming 
 
 # Database
 
-Elasticsearch is queried to display data by the front end. A user's search contains a keyword and a sentiment. Thus the respective elasticsearch query will ask the database to return all tweets that match the topic and sentiment of the query. In order to broaden the result scope, a synonym filter was implemented. With the use of the synonym filter, the results are not limited to the exact search term, but also its synonyms in the filter.
+Elasticsearch is queried to display data by the front end. A user's search contains a keyword and a sentiment. Thus the respective elasticsearch query will ask the database to return all tweets that match the topic and sentiment of the query. In order to broaden the result scope, a synonym filter was implemented. With the use of the synonym filter, the results are not limited to the exact search term, but also its synonyms in the filter. (the DB queries can be found in frontend/app/views.py)
+
+(the html code for the front end can be found in frontend/app/templates/)
