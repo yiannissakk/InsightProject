@@ -13,7 +13,7 @@ TweetSearch is powered by:
 
 All of the technologies listed above are connected as follows
 
-
+![alt text](https://github.com/yiannissakk/InsightProject/frontEnd/static/pipeline.png)
 
 # Data Ingestion
 
@@ -25,4 +25,4 @@ Real-time processing is handled by Spark Streaming. Spark consumes the incoming 
 
 # Database
 
-Elasticsearch is queried to display data by the front end. 
+Elasticsearch is queried to display data by the front end. A user's search contains a keyword and a sentiment. Thus the respective elasticsearch query will ask the database to return all tweets that match the topic and sentiment of the query. In order to broaden the result scope, a synonym filter was implemented. With the use of the synonym filter, the results are not limited to the exact search term, but also its synonyms in the filter.
