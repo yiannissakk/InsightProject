@@ -13,7 +13,7 @@ TweetSearch is powered by:
 
 All of the technologies listed above are connected as follows
 
-![alt text](https://github.com/yiannissakk/InsightProject/frontEnd/static/pipeline.png)
+![](https://github.com/yiannissakk/InsightProject/blob/master/frontEnd/static/pipeline.png)
 
 # Data Ingestion
 
