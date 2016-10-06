@@ -21,7 +21,7 @@ The Kafka producers read from an S3 tweet data dump. The data dump contains 150G
 
 # Real-time Processing
 
-Real-time processing is handled by Spark Streaming. Spark consumes the incoming kafka stream and creates RDDs out of it. It then performs natural language processing on the text of each tweet. The topics as well as the sentiment of each tweet are extracted. Both those fields are added as part of each tweets fields. Finally each RDD is written to Elasticsearch. (the code for the producer can be found in consumer/kafka_consumer_clean.py)
+Real-time processing is handled by Spark Streaming. Spark consumes the incoming kafka stream and creates RDDs out of it. It then performs natural language processing on the text of each tweet. The topics as well as the sentiment of each tweet are extracted and added to the tweet's fields. Finally each RDD is written to Elasticsearch. (the code for the producer can be found in consumer/kafka_consumer_clean.py)
 
 # Database
 
