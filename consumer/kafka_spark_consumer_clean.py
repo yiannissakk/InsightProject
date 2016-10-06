@@ -100,33 +100,20 @@ def stream_to_dataframe(row_rdd):
                 return
 
         else:
-                #print "---------rdd not empty!------------"
-
-                #row_rdd.foreach(lambda x: prnt(x))
-
-                #row_rdd.foreach(lambda x: prnt_tp(x))
-                #map each row rdd to a elasticsearch writable format  
+                #make each rdd readable format for elasticsearch  
                 new_rdd = row_rdd.map(lambda x: try_evaluate(x))
-
-                #new_rdd.foreach(lambda x: prnt(x))
-
-                #new_rdd.foreach(lambda x: prnt_tp(x))
-
-                #print '________ready to write__________'
-
-                #write to ElasticSearch  
+                #write to elasticsearch
                 new_rdd.saveToEs("tweets/docum")
 
-                #print "_____________WROTE TO ES___________________"
-
-
 if __name__ == '__main__':
-
+      
+        master_server = "ec2-52-45-73-216.compute-1.amazonaws.com"
+      
         # initialize Spark and set configurations
         conf = SparkConf()
         conf.setAppName("tweet_data")
-        conf.setMaster("spark://ec2-52-45-73-216.compute-1.amazonaws.com:7077")
-        conf.set("es.nodes", "ec2-52-45-73-216.compute-1.amazonaws.com:9200")
+        conf.setMaster("spark://"+master_server+":7077")
+        conf.set("es.nodes", master_server+":9200")
         conf.set("spark.streaming.stopGracefullyOnShutdown", "true")
         sc = EsSparkContext(conf=conf)
         
@@ -137,7 +124,7 @@ if __name__ == '__main__':
         ssc = StreamingContext(sc, 2)
         
         #create kafka stream
-        kafka_stream = KafkaUtils.createDirectStream(ssc, ["tweets1"], {"metadata.broker.list":"ec2-52-45-73-216.compute-1.amazonaws.com:9092"})
+        kafka_stream = KafkaUtils.createDirectStream(ssc, ["tweets1"], {"metadata.broker.list": master_server+":9092"})
 
         #kafka stream to RDD
         lines = kafka_stream.map(lambda (y,z): z.split(";"))
