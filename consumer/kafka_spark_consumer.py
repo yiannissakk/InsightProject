@@ -109,7 +109,7 @@ if __name__ == '__main__':
       
         master_server = "ec2-52-45-73-216.compute-1.amazonaws.com"
       
-        # initialize Spark and set configurations
+        # initialize Spark Context and set configurations
         conf = SparkConf()
         conf.setAppName("tweet_data")
         conf.setMaster("spark://"+master_server+":7077")
@@ -128,8 +128,8 @@ if __name__ == '__main__':
 
         #kafka stream to RDD
         lines = kafka_stream.map(lambda (y,z): z.split(";"))
-        rDD = lines.map(lambda x: "{'source': "+x[0]+", 'user_id': "+x[1]+", 'text': "+"'%s'"%x[2]+", 'created_at': "+"'%s'"%x[3]+", 'tweet_id': "+x[4]+", 'username': "+"'%s'"%x[5]+", 'topics': " + get_topics(x[2])+", 'sentiment': "+get_sentiment(x[2])+"}")
-        rDD.foreachRDD(stream_to_dataframe)
+        rDDs = lines.map(lambda x: "{'source': "+x[0]+", 'user_id': "+x[1]+", 'text': "+"'%s'"%x[2]+", 'created_at': "+"'%s'"%x[3]+", 'tweet_id': "+x[4]+", 'username': "+"'%s'"%x[5]+", 'topics': " + get_topics(x[2])+", 'sentiment': "+get_sentiment(x[2])+"}")
+        rDDs.foreachRDD(stream_to_dataframe)
 
         ssc.start()
         ssc.awaitTermination()
