@@ -15,57 +15,33 @@ def search_for(term, sentiment):
                     body={
                     "from":0,"size":100,
                     "query": {
-                        "bool": {
-                               "must":[
-                               {"match": {"text": term}},
-                               {"match": {"sentiment": 1}}]}},
-                     "sort":[{"_score":{"order":"desc"}}]})
+                        "constant_score": {
+                               "filter":{
+                                   "bool": {
+                                       "must" : [
+                                           {"term": {"sentiment": 1}},
+                                           {"term": {"text": term}}]}}}}})
     elif sentiment == "negative":
         res = es.search(index="tweets",
                     body={
                     "from":0,"size":100,
                     "query": {
-                        "bool": {
-                                "must":[
-                               {"match": {"text": term}},
-                               {"match": {"sentiment": -1}}]}}})
+                        "constant_score":{
+                               "filter":{
+                                   "bool": {
+                                       "must" : [
+                                           {"term": {"sentiment": -1}},
+                                           {"term": {"text": term}}]}}}}})
     elif sentiment == "no":
         res = es.search(index="tweets",
                     body={
                         "from":0,"size":100,
                         "query": {
-                             "match": {"text": term}}})
+                        "constant_score": {
+                               "filter":{
+                                   "term": {"text": term}}}}})
     return res
 
-def visualize_for(term, sentiment):
-    if sentiment == "positive":
-        res = es.search(index="tweets",
-                    body={
-                    "from":0, "size":9999,
-                    "query": {
-                        "bool":{
-                        "must":{"match": {"topics": term}}}},
-                    "aggs": {
-                        "text":{
-                        "terms":{
-                            "field": "text"}}}})
-    elif sentiment == "negative":
-        res = es.search(index="tweets",
-                    body={
-                    "from":0,"size":100,
-                    "query": {
-                        "bool":{
-                        "must":[
-                               {"match": {"topics": term}},
-                               {"match": {"sentiment": -1}}]}}})
-    elif sentiment == "no":
-        res = es.search(index="tweets",
-                    body={
-                        "from":0,"size":100,
-                        "query": {
-                            "bool":{
-                            "must":{"match": {"topics": term}}}}})
-    return res
 
 @app.route('/search/', methods=['POST'])
 def search():
@@ -77,11 +53,3 @@ def search():
     print results
     return render_template('search.html', results=results['hits'])
 
-@app.route('/visualize/', methods=['POST'])
-def visualize():
-    print 'visualize'
-    term = request.form['term']
-    sentiment = request.form['sentiment']
-    results = visualize_for(term, sentiment)
-    print results
-    return render_template('visualize.html', results=results['hits'])
