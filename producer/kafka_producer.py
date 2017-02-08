@@ -25,7 +25,7 @@ class Producer(object):
             try:
                 #filter tweets: keep fields of interest
                 data = json.loads(line)
-                userid_field = data['user']['id'
+                userid_field = data['user']['id']
                 username_field = data['user']['screen_name']
                 text_field_a = (data['text']).encode('utf-8')
                 text_field = filter(lambda x: x in printable, text_field_a) #remove any non ascii text
@@ -41,7 +41,7 @@ class Producer(object):
                      
                 #the producers queue messages in the form (topic, producer#, message)   
                 self.producer.send_messages('tweets1', source_symbol, message_info)
-             except:
+            except:
                 pass
 
 if __name__ == "__main__":
