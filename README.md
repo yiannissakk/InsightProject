@@ -29,4 +29,4 @@ Elasticsearch is queried to display data by the front end. A user's search conta
 
 (the html code for the front end can be found in frontend/app/templates/)
 
-A screencast of my website can be found [here](https://www.youtube.com/watch?v=7wagPU4l5Oc)
+A screencast of my website can be found [here].(https://www.youtube.com/watch?v=7wagPU4l5Oc)
